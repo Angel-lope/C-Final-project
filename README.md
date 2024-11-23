@@ -2,26 +2,8 @@
 Conways Game of Life with its usual representation and a prefixed example and a bigger layer scan and rules 
 Code explanation:  
 
-Libraries 
-
-#include <iostream> 
-
-#include <cstdlib> 
-
-#include <ctime> 
-
-#include <SFML/Graphics.hpp> 
-
-#include <iostream>: Permite usar entrada y salida estándar como std::cout y std::cin. 
-
-#include <cstdlib>: Incluye funciones de la biblioteca estándar como rand() y srand(). 
-
-#include <ctime>: Permite usar la función time() para generar números aleatorios basados en el tiempo. 
-
-#include <SFML/Graphics.hpp>: Incluye las clases y funciones necesarias para crear gráficos usando SFML. 
-
 Functions 
-
+INITIALIZE RANDOM BOARD
 void initializeRandomBoard(int** board, int rows, int columns) { 
 
     srand(static_cast<unsigned>(time(0))); 
@@ -45,7 +27,7 @@ srand(static_cast<unsigned>(time(0))): Seeds the random number generator.
 rand() % 2: Generates a random value of 0 or 1. 
 
  
-
+INITIALIZE GLIDER GUN BOARD
 void initializeGliderGunBoard(int** board, int rows, int columns) { 
 
     // Clear board 
@@ -101,7 +83,7 @@ board[pos[0]][pos[1]] = 1: Places alive cells in the specified positions.
  
 
  
-
+DRAW BOARD
 void drawBoard(sf::RenderWindow& window, int** board, int rows, int columns, int cellSize) { 
 
     for (int i = 0; i < rows; i++) { 
@@ -140,6 +122,7 @@ cell.setFillColor: Sets the color of the cell depending on whether it is alive (
 
 window.draw(cell): Draws the cell in the window. 
 
+COUNT NEIGHBOURS
 int countNeighbors(int** board, int row, int column, int rows, int columns, int range) { 
 
     int livingNeighbors = 0; 
@@ -174,6 +157,8 @@ int neighborRow = (row + i + rows) % rows;: Calculates the position of the neigh
 
 livingNeighbors += board[neighborRow][neighborColumn];: Adds the state of the neighbor cell (0 or 1) to livingNeighbors. 
 
+
+APPLY RULES
 int applyRules(int neighbors, int currentState) { 
 
     if (neighbors >= 0 && neighbors <= 33) { 
@@ -198,6 +183,7 @@ Purpose: Applies the rules to determine the new state of a cell.
 
 Returns 0 (dead) or 1 (alive) based on the number of living neighbors (neighbors) and specific rules. 
 
+UPDATE BOARD
 void updateBoard(int** board, int rows, int columns, int range, bool useExtendedRules) { 
 
     int** newBoard = new int*[rows]; 
