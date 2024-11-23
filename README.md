@@ -2,7 +2,8 @@
 Conways Game of Life with its usual representation and a prefixed example and a bigger layer scan and rules 
 Code explanation:  
 
-Functions 
+*FUNCTIONS*
+
 INITIALIZE RANDOM BOARD
 void initializeRandomBoard(int** board, int rows, int columns) { 
 
